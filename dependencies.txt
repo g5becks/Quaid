@@ -1,0 +1,135 @@
+# Quaid Project Dependencies
+# Organized by package for the AI-powered knowledge management system
+
+# ==== DEVELOPMENT DEPENDENCIES ====
+# Shared across all packages for development, testing, and code quality
+
+pytest                      # Testing framework
+pytest-cov                 # Coverage testing
+pytest-asyncio             # Async testing support
+pytest-mock                # Mock testing utilities
+ruff                        # Fast Python linter and formatter
+poethepoet                  # Task runner for development workflows
+pre-commit                  # Git hooks for quality gates
+
+# ==== SYSTEM DEPENDENCIES ====
+# External tools that need to be installed separately
+
+graphviz (system package)   # Graph visualization tool
+git (system package)         # Version control system
+
+# ============================================================================
+# PACKAGE-SPECIFIC DEPENDENCIES
+# ============================================================================
+
+# ==== quaid-config ====
+# Configuration management with Pydantic Settings
+
+pydantic                    # Data validation and settings management
+pydantic-settings          # Environment variable support and configuration
+toml                        # TOML configuration file parsing
+
+# ==== quaid-core ====
+# Core data structures and storage layer
+
+pydantic                    # Data models with validation
+pydantic-settings          # Configuration integration
+
+# ==== quaid-search ====
+# Full-text search with Tantivy and metadata processing with Polars
+
+quaid-core                  # Core data structures and storage
+quaid-config                # Configuration management
+tantivy>=0.20              # Full-text search engine with git-storable indexes
+polars>=0.20               # High-performance dataframes for metadata processing
+
+# ==== quaid-graph ====
+# NetworkX-based knowledge graph operations and visualization
+
+quaid-core                  # Core data structures and storage
+quaid-config                # Configuration management
+networkx>=3.2              # Graph algorithms and analysis for knowledge graphs
+python-louvain>=0.16       # Community detection algorithms
+matplotlib>=3.8            # Graph visualization and plotting
+pillow>=10.0               # Image processing for graph exports
+graphviz>=0.20             # Graphviz integration (requires system Graphviz)
+
+# ==== quaid-nlp ====
+# Natural language processing and text analysis
+
+quaid-core                  # Core data structures and storage
+quaid-config                # Configuration management
+spacy>=3.7                 # Natural language processing and entity recognition
+markdown-query>=0.1         # Structural markdown parsing and querying
+
+# ==== quaid-mcp ====
+# FastMCP server framework for AI agent communication
+
+quaid-core                  # Core data structures and storage
+quaid-search                # Search functionality for AI tools
+quaid-graph                 # Graph operations for AI tools
+quaid-config                # Configuration management
+quaid-cleanup               # Cleanup operations for AI tools
+fastmcp                     # MCP server framework for AI agent communication
+
+# ==== quaid-cli ====
+# Rich CLI interface using Typer and Rich
+
+quaid-core                  # Core data structures and storage
+quaid-search                # Search commands
+quaid-graph                 # Graph commands
+quaid-config                # Configuration management
+typer                       # Modern CLI framework with rich help and validation
+rich>=13.7                  # Rich text and beautiful formatting for CLI
+
+# ==== quaid-cleanup ====
+# Automated data cleanup and retention management
+
+quaid-core                  # Core data structures and storage
+quaid-config                # Configuration management
+schedule>=1.2               # Job scheduling for automated cleanup tasks
+GitPython>=3.1              # Git operations for repository maintenance
+
+# ==== quaid-main (Root Application) ====
+# Main application entry point and orchestration
+
+quaid-core                  # Core functionality
+quaid-search                # Search capabilities
+quaid-graph                 # Graph operations
+quaid-nlp                   # Text processing
+quaid-mcp                   # MCP server
+quaid-cli                   # CLI interface
+quaid-cleanup               # Cleanup management
+quaid-config                # Configuration
+
+# ============================================================================
+# OPTIONAL DEPENDENCIES
+# ============================================================================
+
+# ==== DOCUMENTATION DEPENDENCIES ====
+# For documentation generation
+
+mkdocs                      # Documentation site generator
+mkdocs-material             # Material design theme for MkDocs
+mkdocs-mermaid2-plugin     # Mermaid diagram support
+mkdocs-git-revision-date-localized-plugin # Git revision dates
+
+# ==== AI DEPENDENCIES ====
+# For local AI features and reranking
+
+flash-rank>=0.2            # Cross-encoder reranking for local AI
+
+# ==== TUI DEPENDENCIES ====
+# For Terminal User Interface (future feature)
+
+textual>=0.44              # Terminal User Interface framework
+
+# ============================================================================
+# DEPENDENCY NOTES
+# ============================================================================
+
+# - All packages use quaid-config for configuration management
+# - quaid-core is the foundational package used by most others
+# - Workspace members can reference each other using { workspace = true }
+# - System dependencies must be installed separately (brew, apt, etc.)
+# - Optional dependencies can be installed as needed for specific features
