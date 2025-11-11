@@ -16,3 +16,18 @@ build-backend = "uv_build"
 
 [tool.uv.workspace]
 members = ["packages/*"]
+
+[dependency-groups]
+dev = [
+    "pyupgrade>=3.21.1",
+    "vulture>=2.14",
+]
+
+[tool.vulture]
+exclude = ["*/tests/*", "*/test_*.py", "*/conftest.py", "*/__pycache__/*"]
+ignore_decorators = ["@app.route", "@dataclass", "@property"]
+ignore_names = ["_*", "test_*", "setUp*", "tearDown*"]
+min_confidence = 80
+sort_by_size = true
+paths = ["packages/"]
+verbose = false

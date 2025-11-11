@@ -28,3 +28,11 @@ glob = "*.{yaml,yml}"
 [pre-commit.commands.yamllint]
 run  = "mise exec yamllint -- yamllint -c .yamllint.yml {staged_files}"
 glob = "*.{yaml,yml}"
+
+[pre-commit.commands.ruff-format]
+run  = "mise exec ruff -- ruff format {staged_files}"
+glob = "*.py"
+
+[pre-commit.commands.ruff-check]
+run  = "mise exec ruff -- ruff check --fix {staged_files}"
+glob = "*.py"
