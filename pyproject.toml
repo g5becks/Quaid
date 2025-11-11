@@ -1,22 +1,18 @@
 [project]
-name = "quaid"
-version = "0.1.0"
-description = "Add your description here"
-readme = "README.md"
-authors = [
-    { name = "Takin Profit", email = "techstar.dev@hotmail.com" }
-]
+name            = "quaid"
+version         = "0.1.0"
+description     = "Add your description here"
+readme          = "README.md"
+authors         = [{ name = "Takin Profit", email = "techstar.dev@hotmail.com" }]
 requires-python = ">=3.14"
-dependencies = []
+dependencies    = []
 
-[project.scripts]
-quaid = "quaid:main"
+  [project.scripts]
+  quaid = "quaid:main"
 
 [build-system]
-requires = ["uv_build>=0.9.7,<0.10.0"]
+requires      = ["uv_build>=0.9.7,<0.10.0"]
 build-backend = "uv_build"
 
 [tool.uv.workspace]
-members = [
-    "packages/*"
-]
+members = ["packages/*"]

@@ -1,0 +1,80 @@
+# Taplo configuration for TOML formatting
+# Ensures consistent TOML formatting across the Quaid project
+
+# General formatting rules
+[formatting]
+# Align entries vertically when possible
+align_entries = true
+# Reorder keys alphabetically
+reorder_keys = true
+# Align comments with entries
+align_comments = true
+# Indent tables and arrays
+indent_tables = true
+# Indent sub-tables
+indent_sub_tables = true
+# Trailing newline
+array_trailing_comma = true
+# Expand arrays to multiple lines
+array_auto_expand = true
+# Collapse arrays to single line when possible
+array_auto_collapse = true
+
+# Specific rules for pyproject.toml
+[[rule]]
+include = ["pyproject.toml"]
+
+  [rule.formatting]
+  # Align entries vertically for better readability
+  align_entries = true
+  # Keep dependency order as specified (don't reorder)
+  reorder_keys = false
+  # Align comments with their corresponding entries
+  align_comments = true
+  # Indent tables and arrays for hierarchy
+  indent_tables = true
+  # Add trailing commas to arrays for better diffs
+  array_trailing_comma = true
+  # Expand dependency arrays for clarity
+  array_auto_expand = true
+
+# Specific rules for lefthook.toml
+[[rule]]
+include = ["lefthook.toml"]
+
+  [rule.formatting]
+  # Align entries for hook commands
+  align_entries = true
+  # Keep hook order as specified
+  reorder_keys = false
+  # Align comments in hook configuration
+  align_comments = true
+  # Indent hook command tables
+  indent_tables = true
+  # Add trailing commas for consistency
+  array_trailing_comma = true
+  # Keep commands on single lines unless they need expansion
+  array_auto_expand = false
+
+# Specific rules for mise.toml
+[[rule]]
+include = [".mise.toml"]
+
+  [rule.formatting]
+  # Align tool entries
+  align_entries = true
+  # Keep tool order
+  reorder_keys = false
+  # Align comments in tool configuration
+  align_comments = true
+  # Indent tool tables
+  indent_tables = true
+  # Add trailing commas for tool arrays
+  array_trailing_comma = true
+  # Keep arrays compact unless needed
+  array_auto_expand = false
+
+# General schema validation rules
+[schema]
+# Enable schema validation for known file types
+enabled = true

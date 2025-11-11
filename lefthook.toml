@@ -2,9 +2,29 @@
 # Provides git hooks for quality gates and automation
 
 [pre-commit.commands.ls-lint]
-run = "mise exec ls-lint -- ls-lint"
+run  = "mise exec ls-lint -- ls-lint"
 glob = "{*.*,packages/**/*,src/**/*,tests/**/*}"
 
-[pre-commit.commands.taplo-check]
-run = "mise exec taplo -- taplo check {staged_files}"
+[pre-commit.commands.taplo-fmt]
+run  = "mise exec taplo -- taplo fmt {staged_files}"
 glob = "*.toml"
+
+[pre-commit.commands.taplo-check]
+run  = "mise exec taplo -- taplo check {staged_files}"
+glob = "*.toml"
+
+[pre-commit.commands.shfmt-fmt]
+run  = "mise exec shfmt -- shfmt -w -i 2 -sr {staged_files}"
+glob = "*.{sh,bash}"
+
+[pre-commit.commands.shellcheck]
+run  = "mise exec shellcheck -- shellcheck --severity=warning {staged_files}"
+glob = "*.{sh,bash}"
+
+[pre-commit.commands.yamlfmt]
+run  = "mise exec yamlfmt -- yamlfmt {staged_files}"
+glob = "*.{yaml,yml}"
+
+[pre-commit.commands.yamllint]
+run  = "mise exec yamllint -- yamllint -c .yamllint.yml {staged_files}"
+glob = "*.{yaml,yml}"

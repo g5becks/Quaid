@@ -1,0 +1,83 @@
+---
+# yamllint configuration for Quaid Python project
+# Extends default rules with project-specific adjustments
+
+extends: default
+
+# YAML files to consider
+yaml-files:
+  - "*.yaml"
+  - "*.yml"
+  - ".yamllint"
+
+# Rule-specific configurations
+rules:
+  # 120 chars should be enough for modern screens, but warn only
+  line-length:
+    max: 120
+    level: warning
+
+  # Allow both indented and consistent sequence indentation
+  indentation:
+    indent-sequences: whatever
+
+  # Comments are helpful, don't require document start
+  document-start:
+    level: warning
+
+  # Don't require empty lines at end of files (generated files)
+  new-line-at-end-of-file:
+    level: warning
+
+  # Be more lenient with empty lines
+  empty-lines:
+    max: 2
+    level: warning
+
+  # Allow trailing spaces in comments (common when editing)
+  trailing-spaces:
+    level: warning
+
+  # Key ordering is nice but not critical
+  key-ordering:
+    level: warning
+
+  # Braces and brackets spacing - be more lenient
+  braces:
+    level: warning
+    max-spaces-inside: 1
+
+  brackets:
+    level: warning
+    max-spaces-inside: 1
+
+  # Commas and colons spacing - be more lenient
+  commas:
+    level: warning
+
+  colons:
+    level: warning
+
+  # Hyphens spacing - be more lenient
+  hyphens:
+    level: warning
+
+  # Comments indentation is nice but not critical
+  comments-indentation:
+    level: warning
+
+  # Allow truthy values but warn about potential issues
+  truthy:
+    level: warning
+
+# Files and directories to ignore
+ignore: |
+  .git/
+  __pycache__/
+  *.pyc
+  .venv/
+  venv/
+  .quaid/
+  build/
+  dist/
+  *.egg-info/
