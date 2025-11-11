@@ -1,4 +1,3 @@
----
 # yamllint configuration for Quaid Python project
 # Extends default rules with project-specific adjustments
 
@@ -52,7 +51,7 @@ rules:
   key-ordering: disable
 
 # Files and directories to ignore
-ignore: |
+ignore: |-
   .git/
   __pycache__/
   *.pyc

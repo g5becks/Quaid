@@ -19,15 +19,20 @@ members = ["packages/*"]
 
 [dependency-groups]
 dev = [
+    "bandit[toml]>=1.8.6",
     "pyupgrade>=3.21.1",
     "vulture>=2.14",
 ]
 
 [tool.vulture]
-exclude = ["*/tests/*", "*/test_*.py", "*/conftest.py", "*/__pycache__/*"]
+exclude           = ["*/tests/*", "*/test_*.py", "*/conftest.py", "*/__pycache__/*"]
 ignore_decorators = ["@app.route", "@dataclass", "@property"]
-ignore_names = ["_*", "test_*", "setUp*", "tearDown*"]
-min_confidence = 80
-sort_by_size = true
-paths = ["packages/"]
-verbose = false
+ignore_names      = ["_*", "test_*", "setUp*", "tearDown*"]
+min_confidence    = 80
+sort_by_size      = true
+paths             = ["packages/"]
+verbose           = false
+
+[tool.bandit]
+exclude_dirs = ["*/tests/*", "*/test_*", "*/conftest.py", "*/__pycache__/*"]
+skips = ["B101", "B601"]

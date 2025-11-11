@@ -13,55 +13,59 @@ yamlfmt           = "latest"
 yamllint          = "latest"
 
 [tasks]
-# Individual linter tasks
-[tasks."lint:yml"]
-description = "Lint YAML files with yamllint"
-run = "yamllint .yamllint.yml"
+  # Individual linter tasks
+  [tasks."lint:yml"]
+  description = "Lint YAML files with yamllint"
+  run         = "yamllint .yamllint.yml"
 
-[tasks."lint:toml"]
-description = "Lint TOML files with taplo"
-run = "taplo check *.toml"
+  [tasks."lint:toml"]
+  description = "Lint TOML files with taplo"
+  run         = "taplo check *.toml"
 
-[tasks."lint:sh"]
-description = "Lint shell scripts with shellcheck"
-run = "find . -name '*.sh' -o -name '*.bash' ! -path './claude-self-reflect/*' | xargs shellcheck --severity=warning"
+  [tasks."lint:sh"]
+  description = "Lint shell scripts with shellcheck"
+  run         = "find . -name '*.sh' -o -name '*.bash' ! -path './claude-self-reflect/*' | xargs shellcheck --severity=warning"
 
-[tasks."lint:py"]
-description = "Lint Python files with ruff"
-run = "ruff check ."
+  [tasks."lint:py"]
+  description = "Lint Python files with ruff"
+  run         = "ruff check ."
 
-[tasks."lint:upgrade"]
-description = "Upgrade Python syntax with pyupgrade"
-run = "find packages/ -name '*.py' -exec uv run pyupgrade --py314-plus {} +"
+  [tasks."lint:upgrade"]
+  description = "Upgrade Python syntax with pyupgrade"
+  run         = "find packages/ -name '*.py' -exec uv run pyupgrade --py314-plus {} +"
 
-[tasks."lint:dead"]
-description = "Find dead code with vulture"
-run = "uv run vulture"
+  [tasks."lint:dead"]
+  description = "Find dead code with vulture"
+  run         = "uv run vulture"
 
-[tasks."lint:naming"]
-description = "Check file naming conventions with ls-lint"
-run = "ls-lint ."
+  [tasks."lint:security"]
+  description = "Run security vulnerability checks with bandit"
+  run         = "uv run bandit -c pyproject.toml -r packages/"
 
-# Individual formatter tasks
-[tasks."fix:yml"]
-description = "Format YAML files with yamlfmt"
-run = "yamlfmt ."
+  [tasks."lint:naming"]
+  description = "Check file naming conventions with ls-lint"
+  run         = "ls-lint ."
 
-[tasks."fix:toml"]
-description = "Format TOML files with taplo"
-run = "taplo fmt *.toml"
+  # Individual formatter tasks
+  [tasks."fix:yml"]
+  description = "Format YAML files with yamlfmt"
+  run         = "yamlfmt ."
 
-[tasks."fix:sh"]
-description = "Format shell scripts with shfmt"
-run = "find . -name '*.sh' -o -name '*.bash' | xargs shfmt -w -i 2 -sr"
+  [tasks."fix:toml"]
+  description = "Format TOML files with taplo"
+  run         = "taplo fmt *.toml"
 
-[tasks."fix:py"]
-description = "Format Python files with ruff"
-run = "ruff format ."
+  [tasks."fix:sh"]
+  description = "Format shell scripts with shfmt"
+  run         = "find . -name '*.sh' -o -name '*.bash' | xargs shfmt -w -i 2 -sr"
 
-[tasks."fix:upgrade"]
-description = "Upgrade and format Python files"
-run = '''
+  [tasks."fix:py"]
+  description = "Format Python files with ruff"
+  run         = "ruff format ."
+
+  [tasks."fix:upgrade"]
+  description = "Upgrade and format Python files"
+  run = '''
 echo "🔄 Upgrading Python syntax..."
 find packages/ -name '*.py' -exec uv run pyupgrade --py314-plus {} +
 echo "📝 Formatting Python files..."
@@ -69,10 +73,10 @@ mise run fix:py
 echo "✅ Python upgrade and formatting completed!"
 '''
 
-# Combined tasks
-[tasks."lint:all"]
-description = "Run all linters on the entire project"
-run = '''
+  # Combined tasks
+  [tasks."lint:all"]
+  description = "Run all linters on the entire project"
+  run = '''
 echo "🔍 Running all linters..."
 mise run lint:naming
 mise run lint:yml
@@ -81,12 +85,13 @@ mise run lint:sh
 mise run lint:py
 mise run lint:upgrade
 mise run lint:dead
+mise run lint:security
 echo "✅ All linters completed!"
 '''
 
-[tasks."fix:all"]
-description = "Format and fix all files in the project"
-run = '''
+  [tasks."fix:all"]
+  description = "Format and fix all files in the project"
+  run = '''
 echo "🔧 Running all formatters and fixes..."
 mise run fix:yml
 mise run fix:toml
@@ -96,59 +101,59 @@ mise run fix:upgrade
 echo "✅ All formatting and fixes completed!"
 '''
 
-[tasks."check:all"]
-description = "Run comprehensive check (lint + fix) on the project"
-depends = ["fix:all", "lint:all"]
-run = "echo '🎉 Comprehensive check completed!'"
+  [tasks."check:all"]
+  description = "Run comprehensive check (lint + fix) on the project"
+  depends     = ["fix:all", "lint:all"]
+  run         = "echo '🎉 Comprehensive check completed!'"
 
-# Convenience aliases
-[tasks.lint]
-description = "Alias for lint:all"
-alias = "lint:all"
+  # Convenience aliases
+  [tasks.lint]
+  description = "Alias for lint:all"
+  alias       = "lint:all"
 
-[tasks.fix]
-description = "Alias for fix:all"
-alias = "fix:all"
+  [tasks.fix]
+  description = "Alias for fix:all"
+  alias       = "fix:all"
 
-[tasks.check]
-description = "Alias for check:all"
-alias = "check:all"
+  [tasks.check]
+  description = "Alias for check:all"
+  alias       = "check:all"
 
-# Development workflow tasks
-[tasks."dev:setup"]
-description = "Set up development environment"
-run = '''
+  # Development workflow tasks
+  [tasks."dev:setup"]
+  description = "Set up development environment"
+  run = '''
 echo "🚀 Setting up Quaid development environment..."
 mise install
 mise run lint:all
 echo "✅ Development environment ready!"
 '''
 
-[tasks."dev:watch"]
-description = "Watch for changes and run linting"
-run = '''
+  [tasks."dev:watch"]
+  description = "Watch for changes and run linting"
+  run = '''
 echo "👀 Watching for changes..."
 mise watch lint:all
 '''
 
-[tasks."pre-commit:check"]
-description = "Run the same checks as pre-commit hooks"
-run = '''
+  [tasks."pre-commit:check"]
+  description = "Run the same checks as pre-commit hooks"
+  run = '''
 echo "🪝 Running pre-commit checks..."
 mise exec lefthook -- lefthook run pre-commit
 '''
 
-# Testing tasks
-[tasks.test]
-description = "Run tests"
-run = '''
+  # Testing tasks
+  [tasks.test]
+  description = "Run tests"
+  run = '''
 echo "🧪 Running tests..."
 uv run pytest
 '''
 
-[tasks."test:watch"]
-description = "Watch for changes and run tests"
-run = '''
+  [tasks."test:watch"]
+  description = "Watch for changes and run tests"
+  run = '''
 echo "🧪 Watching for test changes..."
 mise watch test
 '''
