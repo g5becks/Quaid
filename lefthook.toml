@@ -1,0 +1,10 @@
+# Lefthook configuration for Quaid Python project
+# Provides git hooks for quality gates and automation
+
+[pre-commit.commands.ls-lint]
+run = "mise exec ls-lint -- ls-lint"
+glob = "{*.*,packages/**/*,src/**/*,tests/**/*}"
+
+[pre-commit.commands.taplo-check]
+run = "mise exec taplo -- taplo check {staged_files}"
+glob = "*.toml"
