@@ -1,0 +1,12 @@
+[tools]
+actionlint = "latest"
+"cargo:ck-search" = "latest"
+goreleaser = "latest"
+lefthook = "latest"
+ls-lint = "latest"
+ruff = "latest"
+shellcheck = "latest"
+taplo = "latest"
+uv = "latest"
+yamlfmt = "latest"
+yamllint = "latest"

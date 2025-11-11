@@ -9,8 +9,8 @@ pytest-cov                 # Coverage testing
 pytest-asyncio             # Async testing support
 pytest-mock                # Mock testing utilities
 ruff                        # Fast Python linter and formatter
-poethepoet                  # Task runner for development workflows
-pre-commit                  # Git hooks for quality gates
+mise                        # Task runner and environment management
+lefthook                   # Git hooks for quality gates
 
 # ==== SYSTEM DEPENDENCIES ====
 # External tools that need to be installed separately

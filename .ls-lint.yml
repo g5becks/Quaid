@@ -1,0 +1,135 @@
+# ls-lint configuration for Quaid Python project
+# Enforces Python community naming conventions
+
+ls:
+  # Main application directory
+  src:
+    .dir: snake_case
+    .py: snake_case
+
+  # Configuration files
+  config: snake_case
+  configs: snake_case
+
+  # Tests directory
+  tests:
+    .dir: snake_case
+    .py: snake_case
+    "test_*.py": snake_case
+    "*_test.py": snake_case
+
+  # Documentation
+  docs: snake_case
+  _build: snake_case
+
+  # Scripts and tools
+  scripts: snake_case
+  tools: snake_case
+
+  # Package directories
+  packages:
+    .dir: snake_case
+    .py: snake_case
+    __init__.py: snake_case
+
+  # Package subdirectories
+  "packages/*":
+    .dir: kebab-case
+    src:
+      .dir: snake_case
+      .py: snake_case
+    tests:
+      .dir: snake_case
+      .py: snake_case
+      "test_*.py": snake_case
+      "*_test.py": snake_case
+
+  # Type stub files
+  "*.pyi": snake_case
+
+  # Build directories
+  build: snake_case
+  dist: snake_case
+
+  # Development directories
+  .venv: snake_case
+  env: snake_case
+  venv: snake_case
+
+  # Configuration files
+  "*.toml": snake_case
+  "*.yaml": snake_case
+  "*.yml": snake_case
+  "*.json": snake_case
+  "*.ini": snake_case
+  "*.cfg": snake_case
+  "*.conf": snake_case
+
+  # Documentation files
+  "*.md": snake_case
+  "*.rst": snake_case
+  "*.txt": snake_case
+
+  # Lock files (workspace managed)
+  uv.lock: snake_case
+
+  # CI/CD
+  .github: snake_case
+  .gitlab: snake_case
+
+  # IDE files
+  .vscode: snake_case
+  .idea: snake_case
+
+ignore:
+  # Python cache and build artifacts
+  - __pycache__/
+  - "*.py[cod]"
+  - "*.pyo"
+  - "*.pyd"
+  - "*.pyc"
+  - .coverage
+  - .pytest_cache/
+  - .mypy_cache/
+
+  # Distribution
+  - build/
+  - dist/
+  - "*.egg-info/"
+  - "*.egg"
+
+  # Environment files
+  - .env
+  - .env.*
+  - "*.venv/"
+  - venv/
+  - env/
+
+  # IDE and editor files
+  - .DS_Store
+  - .vscode/
+  - .idea/
+  - "*.swp"
+  - "*.swo"
+  - "*~"
+
+  # OS files
+  - Thumbs.db
+  - .DS_Store?
+  - "._*"
+  - .Spotlight-V100
+  - .Trashes
+
+  # Quaid specific
+  - .quaid/
+  - "*.quaid"
+
+  # Temporary files
+  - "*.tmp"
+  - "*.temp"
+  - temp/
+  - tmp/
+
+  # Logs
+  - "*.log"
+  - logs/
